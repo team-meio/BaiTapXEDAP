@@ -9,10 +9,11 @@ import {
   StyleSheet,
   FlatList,
 } from 'react-native';
-import ManHinh2_v2 from "./components/Manhinh2"
+import ManHinh2_v2 from './components/Manhinh2';
 const Stack = createStackNavigator();
-import {store} from "./Redux/store"
-import {Provider} from "react-redux"
+import { store } from './Redux/store';
+import { Provider } from 'react-redux';
+import Admin from './components/Admin';
 
 function ManHinhOne({ navigation }) {
   return (
@@ -128,12 +129,10 @@ const DATA = [
   },
 ];
 
-
-
-const Item = ({product, index}) => (
+const Item = ({ product, index }) => (
   <TouchableOpacity
     onPress={() => {
-      navigation.navigate('Detail', {product:product});
+      navigation.navigate('Detail', { product: product });
     }}>
     <View
       style={{
@@ -218,7 +217,7 @@ function ManHinh2({ navigation }) {
         <FlatList
           data={DATA}
           renderItem={({ item, index }) => (
-            <Item  product={item} index={index}/>
+            <Item product={item} index={index} />
           )}
           keyExtractor={(item) => item.id}
           contentContainerStyle={{ flexGrow: 1 }} // Use flexGrow for dynamic content size
@@ -232,29 +231,34 @@ function ManHinh2({ navigation }) {
 
 export default function App() {
   return (
-<Provider store={store}>
-
-    <NavigationContainer>
-      <Stack.Navigator
-        initialRouteName="Home"
-        screenOptions={{ cardStyle: { flex: 1 } }}>
-        <Stack.Screen
-          name="Home"
-          component={ManHinhOne}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name="Shops"
-          component={ManHinh2_v2}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name="Detail"
-          component={ProductScreen}
-          options={{ headerShown: false }}
-        />
-      </Stack.Navigator>
-    </NavigationContainer></Provider>
+    <Provider store={store}>
+      <NavigationContainer>
+        <Stack.Navigator
+          initialRouteName="Admin"
+          screenOptions={{ cardStyle: { flex: 1 } }}>
+          <Stack.Screen
+            name="Home"
+            component={ManHinhOne}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="Shops"
+            component={ManHinh2_v2}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="Detail"
+            component={ProductScreen}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="Admin"
+            component={Admin}
+            options={{ headerShown: false }}
+          />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </Provider>
   );
 }
 const styles = StyleSheet.create({
@@ -307,7 +311,7 @@ function ProductScreen({ route }) {
     if (quantity > 1) setQuantity(quantity - 1);
   };
 
-  return (<View>Hello</View>)
+  return <View>Hello</View>;
 
   // return (
   //   <View
